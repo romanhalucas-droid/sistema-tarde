@@ -1,4 +1,15 @@
 <?php
+function verException($logica, $valor, $message){
+    //SE LOGICA ENVIADA FOR IGUAL A VERDADEIRA
+    if($logica){
+        //RETORNAR VALOR PARA VARIÁVEL
+        return $valor;
+    }else{//SENÃO
+        //GERAR UM EXCEPTION COM UMA MENSAGEM PERSONALIZADA
+        throw new Exception($message);
+    }
+}
+
 
 function saudacao(){
     //PRE: NÃO EXIGE PARAMETROS
