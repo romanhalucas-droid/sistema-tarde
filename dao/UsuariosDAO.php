@@ -66,11 +66,39 @@ class UsuariosDAO{
                     "A conexão não foi aberta!"
             );
             
+            //SELECIONAR TODOS OS USUÁRIOS
+            $sql->prepare("SELECT * FROM usuarios");
             
+            $sql->execute(); //APERTO ENTER
+            
+            $resultado = $sql->fetchAll(PDO::FETCH_ASSOC); //RECEBER OS RESULTADOS
+            
+            $objs = array();
+            
+            foreach ($resultado as $linha){                               
+                $objs[] = self::estruturarSQL($conn, $linha);
+            }
+            
+            return $objs;
         } catch (Exception $e) {
-
+            echo "ERRO: {$e->getMessage()}";
+            return false;
         }
     }
+    
+    ///////////////////////////////////////////
+    //SALVAR USUÁRIO
+    ///////////////////////////////////////////
+    public static function salvar($array) {
+        try{
+            $conn = verException(!empty($array['conn']), $array['conn'], "A conexão não foi aberta!");
+            
+        } catch (Exception $e) {
+            echo "ERRO: {$e->getMessage()}";
+            return false;
+        }
+    }
+    
     
 }
 
