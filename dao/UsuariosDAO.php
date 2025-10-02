@@ -92,6 +92,56 @@ class UsuariosDAO{
     public static function salvar($array) {
         try{
             $conn = verException(!empty($array['conn']), $array['conn'], "A conexão não foi aberta!");
+            $obj = verException(!empty($array['obj']), $array['obj'], "O objeto não foi enviado!");
+            
+            if($obj->getId()>0){//SE ID DO USUÁRIO FOR MAIOR QUE 0
+                //ATUALIZANDO
+                //id, nome, email, cpf, dtnasc, usuario, senha, contato1
+                $sql = "UPDATE usuarios SET nome=:nome, email=:email, cpf=:cpf, dtnasc=:dtnasc, usuario=:usuario "
+                        . "senha=:senha, contato1=:contato1 WHERE id=:id";
+                $sql = $conn->prepare($sql);//PREPARAR SQL
+                $sql->bindValue(":id", $obj->getId()); //ENVIAR O VALOR DE ID PARA O CAMPO :ID
+            }else{
+                //ADICIONANDO NOVO
+                $sql = "INSERT INTO usuarios(nome, email, cpf, dtnasc, usuario, senha, contato1) VALUES "
+                        . "(:nome, :email, :cpf, :dtnasc, :usuario, :senha, :contato1)";
+                $sql = $conn->prepare($sql);//PREPARAR SQL
+            }
+            
+            //ASSOCIAR OBJETO AOS CAMPOS DO BANCO DE DADOS
+            $sql->bindValue(":nome", $obj->getNome());
+            $sql->bindValue(":email", $obj->getEmail());
+            $sql->bindValue(":cpf", $obj->getCpf());
+            $sql->bindValue(":dtnasc", $obj->getDtNasc());
+            $sql->bindValue(":usuario", $obj->getUsuario());
+            $sql->bindValue(":senha", $obj->getSenha());
+            $sql->bindValue(":contato1", $obj->getContato1());
+            
+            if($sql->execute()){
+                //SE ID DO OBJETO FOR VAZIO ENTÃO:
+                    //PUXAR O ÚLTIMO ID INSERIDO NA CONEXÃO
+                //SENÃO
+                    //O ID SERÁ O PRÓPRIO ID DO OBJETO CRIADO
+                $id = empty($obj->getId()) ? $conn->lastInsertId() : $obj->getId();
+                return $id; //CASO ESTEJA TUDO CERTO, RETORNAR O ID DO USUARIO CRIADO
+            }else{
+                //CASO ALGO DE ERRADO, RETORNAR FALSO
+                return false;
+            }
+            
+        } catch (Exception $e) {
+            echo "ERRO: {$e->getMessage()}";
+            return false;
+        }
+    }
+    
+    ///////////////////////////////////////////
+    //EXCLUIR
+    ///////////////////////////////////////////
+    public static function excluir($array){
+        try{
+            $conn = verException(!empty($array['conn']), $array['conn'], "A conexão não foi aberta!");
+            $obj = verException(!empty($array['obj']), $array['obj'], "O objeto não foi enviado!");
             
         } catch (Exception $e) {
             echo "ERRO: {$e->getMessage()}";
