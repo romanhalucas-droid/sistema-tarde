@@ -143,11 +143,49 @@ class UsuariosDAO{
             $conn = verException(!empty($array['conn']), $array['conn'], "A conexão não foi aberta!");
             $obj = verException(!empty($array['obj']), $array['obj'], "O objeto não foi enviado!");
             
+            //DELETAR NA TABELA USUÁRIOS ONDE ID É IGUAL A :ID
+            $sql = $conn->prepare("DELETE FROM usuarios WHERE id=:id");
+            $sql->bindValue(':id', $obj->getId());
+            
+            //SE SQL FOR EXECUTADO COM SUCESSO
+            if($sql->execute()){
+                //RETORNAR ID DO OBJETO EXCLUIDO
+                return $obj->getId();
+            }else{
+                //RETORNAR FALSO
+                return false;
+            }
         } catch (Exception $e) {
             echo "ERRO: {$e->getMessage()}";
             return false;
         }
     }
+    
+    //////////////////////////////////////////////
+    //SELECIONAR QUANTIDADE DE REGISTROS NA TABELA
+    //////////////////////////////////////////////
+    public static function selectQtd($array){
+        try{
+            $conn = verException(!empty($array['conn']), $array['conn'], "A conexão não foi aberta!");
+            
+            //SELECIONAR A QUANTIDADE DE REGISTROS NA TABELA USUÁRIOS
+            $sql = $conn->prepare("SELECT COUNT(*) AS qtd FROM usuarios");
+            $sql->execute();
+            
+            $resultado = $sql->fetchAll(PDO::FETCH_ASSOC); //RECEBER OS RESULTADOS
+            
+            foreach($resultado as $linha){//CASO TENHA RESULTADO, IRÁ PECORRER O ARRAY RESULTADO
+                return $linha['qtd']; //RETORNAR A QUANTIDADE DE REGISTRO
+            }   
+            
+            return 0; //CASO NÃO TENHA REGISTRO, RETORNAR 0;            
+        } catch (Exception $e) {
+            echo "ERRO: {$e->getMessage()}";
+            return false;    
+        }
+    }
+    
+    
     
     
 }
