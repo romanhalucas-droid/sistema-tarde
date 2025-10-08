@@ -23,6 +23,13 @@ $senha = $_POST['senha'];
 $contato1 = $_POST['contato1'];
 
 try{
+    //DESATIVAR SAVE AUTOMÁTICO DO BD
+    $conn_db->setAttribute(PDO::ATTR_AUTOCOMMIT, false);    
+    $conn_db->beginTransaction(); //INICIANDO CONEXÃO MANUALMENTE    
+    
+    $obj = new Usuario(null); //INSTANCIANDO OBJETO
+    $obj->setId($id); //PEGAR VALOR RECEBIDO PELO POST E ALOCAR NO OBJETO
+    
     
     
 } catch (PDOException $e) {
