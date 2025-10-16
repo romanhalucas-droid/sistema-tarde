@@ -17,7 +17,29 @@
             </div>
             
             <div class="table-responsive mt-1 bg-white">
-            
+                <table id="tabela_listar_usuarios" class="table table-striped table-bordered w-100">
+                    <thead>
+                        <tr><!-- LINHA -->
+                            <th>Id</th><!-- COLUNA -->
+                            <th>Nome</th>
+                            <th>Usuário</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody> <!--AQUI APARECE AS INFORMAÇÕES DA TABELA -->
+                        <?php
+                            //INICIAR CONEXÃO
+                            require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/conexao/inicio_conexao.php'; 
+                            
+                            $usuarios = UsuariosDAO::selectAll([
+                                'conn' => $conn_db
+                            ]);
+                            
+                            //FINALIZAR CONEXÃO
+                            require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/conexao/fim_conexao.php';                            
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
         

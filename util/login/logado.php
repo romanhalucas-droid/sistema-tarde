@@ -13,3 +13,4 @@ if(!isset($_SESSION['logadosistema']) OR $_SESSION['logadosistema']==false){
 }
 
 require_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/dao/Funcoes.php";
+require_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/dao/UsuariosDAO.php";

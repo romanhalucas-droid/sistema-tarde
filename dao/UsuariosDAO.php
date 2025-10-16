@@ -67,8 +67,8 @@ class UsuariosDAO{
             );
             
             //SELECIONAR TODOS OS USUÁRIOS
-            $sql->prepare("SELECT * FROM usuarios");
-            
+            $sql = $conn->prepare("SELECT * FROM usuarios");
+             
             $sql->execute(); //APERTO ENTER
             
             $resultado = $sql->fetchAll(PDO::FETCH_ASSOC); //RECEBER OS RESULTADOS
