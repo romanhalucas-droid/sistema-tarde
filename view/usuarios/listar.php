@@ -38,6 +38,20 @@
                             //FINALIZAR CONEXÃO
                             require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/conexao/fim_conexao.php';                            
                         ?>
+                        
+                        <?php foreach ($usuarios as $u): ?>
+                            <tr>
+                                <td><?= $u->getId() ?></td>
+                                <td><?= $u->getNome() ?></td><!-- nome -->
+                                <td><?= $u->getUsuario() ?></td>
+                                <td>
+                                    <!--EDITAR -->
+                                    <a class="link-success link-offset-2">
+                                        Editar
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
