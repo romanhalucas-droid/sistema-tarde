@@ -68,7 +68,103 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                 name="formcadastrarusuario" id="formcadastrarusuario" 
                 action="/html/sistema/validacao/usuarios/salvar.php" method="post"
             >                
-                
+                <!-- id nome email dtNasc usuario senha cpf contato1 -->
+                <?php if($id==0): ?>
+                    <!-- caixa de texto invisivel -->
+                    <input class='form-control' type='hidden' id='id' name='id'
+                           value='<?=htmlspecialchars($id)?>' required readonly>
+                <?php else: ?>
+                    <div class='form-floating'>
+                        <!-- caixa de texto visivel -->
+                        <input class='form-control' type='text' id='id' name='id'
+                               value='<?=htmlspecialchars($id)?>' required readonly> 
+                        <label for='id'>Código</label>
+                    </div>
+                <?php endif ?>
+                  
+                <div class='row'><!--linha tamanho máximo (12)-->
+                    <div class='col-sm-6'><!-- coluna tamanho 6 (máximo 12) -->
+                        
+                        <!-- nome do usuário -->
+                        <div class='form-floating mt-1'>
+                            <input type='text' class='form-control obrigatorio' id='nome'
+                                   name='nome' value='<?= htmlspecialchars($nome) ?>'
+                                   placeholder="Nome do usuário..." required>
+                            <label for='nome'>Nome do usuário:</label>
+                        </div> 
+                        
+                    </div>
+                    <div class='col-sm-6'><!-- coluna tamanho 6 (máximo 12) -->
+                    
+                        <!--email do usuario-->
+                        <div class="form-floating mt-1">
+                            <input type="email" class="form-control obrigatorio" value="<?=$email?>"
+                                   name="email" id="email" placeholder="Email..." required>
+                            <label for='email'>E-mail:</label>
+                        </div>
+                        
+                    </div>
+                </div>
+                    
+                <div class="row">                    
+                    <div class='col-sm-6'>
+                        
+                        <!--contato1-->
+                        <div class="form-floating mt-1">
+                            <input type="text" class="form-control" value="<?= htmlspecialchars($contato1)?>"
+                                   name="contato1" id="contato1" placeholder="Digite o número...">
+                            <label for="contato1">Contato 1:</label>
+                        </div>
+                        <script>
+                            $('#contato1').mask('(00) 00000-0000');
+                        </script>
+                        
+                    </div>
+                    <div class='col-sm-6'>
+                        
+                        <!--data nascimento -->
+                        <?php
+                        
+                            function dtSqlToBrasil($data){
+                                //pre: RECEBER A DATA NO FORMATO DE SQL PARA SER CONVERTIDA
+                                //POS: retornar data no formato brasileiro
+                                if(!empty($data)){//verificar se existe data
+                                    $temp = explode('-', $data);
+                                    return "{$temp[2]}/{$temp[1]}/{$temp[0]}";
+                                }else{
+                                    return "";
+                                }
+                            }
+                        ?>
+                        
+                        <div class='form-floating mt-1'>
+                            <input type='text' class='form-control' value='<?= dtSqlToBrasil($dtnasc)?>'
+                                   id='dtnasc' name='dtnasc' placeholder="Data de nascimento..." required>
+                            <label for='dtnasc'>Data de nascimento:</label>
+                        </div>
+                        
+                        <script>
+                            $("#dtnasc").mask('00/00/0000', {reverser: false});
+                            
+                            function getDataMaxima(){
+                                const hoje = new Date();
+                                hoje.setFullYear(hoje.getFullYear() - 16);
+                                return hoje;
+                            }
+                            
+                            
+                            $('#dtnasc').datepicker({
+                                language: 'pt-BR',
+                                format: 'dd/mm/yyyy',
+                                startView: 2,
+                                endDate: getDataMaxima()
+                            });
+                        </script>    
+                        
+                    </div>
+                </div>
+                    
+                    
             </form>
             <!-- FIM DO FORMULÁRIO -->
         </div>
