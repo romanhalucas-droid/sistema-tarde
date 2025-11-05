@@ -24,6 +24,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/html/sistema/util/login/logado.php';
               <i class="bi bi-house-door me-2"></i>Inicio
           </a>
         </li>
+        
+        <!--USUÁRIOS -->
+        <li class='nav-item'>
+            <a class='nav-link' aria-current='page' href='/html/sistema/view/usuarios/listar.php'>
+                <i class='bi bi-person me-1'></i>Usuários
+            </a>
+        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="/html/sistema/validacao/login/sair.php">
               <i class="bi bi-door-open me-2"></i>Sair

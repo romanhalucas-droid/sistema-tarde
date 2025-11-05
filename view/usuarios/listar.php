@@ -13,7 +13,10 @@
         
         <div class="container shadow-sm mt-sm-2 bg-white p-3 rounded-3">
             <div class="btns">
-                
+                <!--Adicionar-->
+                <a href="/html/sistema/view/usuarios/cadastrar.php?id=0" class="btn btn-success">              
+                    <i class="bi bi-person-fill-add me-1"></i> Adicionar
+                </a>
             </div>
             
             <div class="table-responsive mt-1 bg-white">
@@ -46,7 +49,8 @@
                                 <td><?= $u->getUsuario() ?></td>
                                 <td>
                                     <!--EDITAR -->
-                                    <a class="link-success link-offset-2">
+                                    <a class="link-success link-offset-2"
+                                       href='/html/sistema/view/usuarios/cadastrar.php?id=<?= $u->getId() ?>'>
                                         Editar
                                     </a>
                                 </td>
