@@ -61,6 +61,12 @@
             </div>
         </div>
         
+        <script nonce="<?= uniqid() ?>">
+            $(document).ready(function () {
+                let tabelaUsuarios = iniciarTabela("#tabela_listar_usuarios");
+            });
+        </script>
+        
         <?php include_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
     </body>
 </html>

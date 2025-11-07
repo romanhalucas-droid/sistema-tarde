@@ -54,10 +54,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
 
 <script nonce="<?= uniqid() ?>" src="https://cdn.jsdelivr.net/npm/bootbox@6.0.0/bootbox.js"></script>
 
+<script 
+    nonce="<?= uniqid() ?>" 
+    src="/html/sistema/js/datatable.js"
+    type="text/javascript"    
+></script>
+
 <style>
     input:required:invalid {
         border-color: red;
     }
+    
+    
 </style>
 
 
