@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 }
 
 //criar template com nome: LOGADO
-require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
 ?>
 
 <meta charset="UTF-8">

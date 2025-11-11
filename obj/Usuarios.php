@@ -213,8 +213,23 @@ class Usuarios{
             ];
         }
         
+        //////////////////////////////////////////////
+        //CONTATO1
+        //////////////////////////////////////////////
         
+        if(!empty($contato1) AND strlen($contato1)<10){
+            //SE CONTATO1 FOR DIFERENTE  DE VAZIO E TAMANHO FOR MENOR QUE 10
+            return [
+                'result' => false,
+                'msg' => "Número informado no campo CONTATO 1 inválido."
+            ];
+        }
         
+        //caso esteja certo
+        return [
+            'result' => true,
+            'msg' => "Validado com sucesso!"
+        ];
     }
     
 }

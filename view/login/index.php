@@ -1,103 +1,53 @@
-<?php
-    session_start(); //INICIAR SESSÃO
-    
-    // Verifica se a sessão existe e se a chave "logadosistema" está definida como verdadeiro
-    if(isset($_SESSION) AND isset($_SESSION['logadosistema']) AND $_SESSION['logadosistema']==true){
-        //REDIRECIONAR PARA O INICIO
-        header('location:/html/sistema/view/inicio/');
-    }
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">          
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
-        <link href="style.css?v=<?= uniqid() ?>" rel="stylesheet" type="text/css" />
+        <title>LOGIN | SISTEMA</title>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/html/sistema/util/estrutura/cabecalho.php" ?>
     </head>
     <body>
-        <div class="container">
-            <?php
-                $erro = false;
-            
-                //VERIFICAR SE A PESSOA ESTÁ TENTANDO FAZER LOGIN
-                if(!empty($_POST)){
-                    //SE METHOD POST FOR DIFERENTE DE VAZIO                  
-                    //RECEBENDO AS INFORMAÇÕES DO FORMULÁRIO
-                    $usuario = $_POST['usuario'];
-                    $senha = $_POST['senha'];                                                                                
+        <div class="container d-flex justify-content-center align-items-center" style="height: 100vh">
+            <div class="card bg-light mt-1 w-100 shadow-sm border-0" style="max-width: 30rem; /*MAXIMO LARGURA */">
+                <div class="card-body">
+                    <div class="resultado"></div>
                     
-                    //VERIFICAR SE USUÁRIO DIGITADO ESTÁ CORRETO
-                    if($usuario=="admin" AND $senha=="inspira"){
-                        //USUÁRIO ENTROU COM SUCESSO
-                        $_SESSION['logadosistema']  = true;
-                        $_SESSION['usuariosistema'] = $usuario;
-                        $_SESSION['nomesistema'] = "Lucas Barbosa Romanha";                        
+                    <form id="formLogin" name="formLogin" method="POST" action="/html/sistema/validacao/login/login.php">
                         
-                        ?><div class="sucesso">Usuário logado com sucesso!</div><?php
+                        <div class="form-floating">
+                            
+                            <input
+                                type="text"
+                                placeholder="Usuário..."
+                                class="form-control"
+                                id="usuario"
+                                name="usuario"
+                                autocomplete="username"
+                                autofocus
+                                required
+                            />
+                            <label for="usuario"><i class="bi bi-person-circle" aria-hidden="true"></i> Digite o usuário...</label>
+                            
+                        </div>
                         
-                        //REDIRECIONAR PARA PÁGINA DE INICIO
-                        header('location:/html/sistema/view/inicio/');
-                    }else{//SENÃO
-                        //USUÁRIO E/OU SENHA INVÁLIDOS
-                        $erro = true;
-                        ?><div class="erro">Usuário e/ou senha inválidos</div><?php
-                    }
-                    
-                }
-            
-            ?>
-
-            <?php if(empty($_SESSION['logadosistema']) OR $_SESSION['logadosistema'] == false): ?>
-            <div id="clogin" class="clogin">
-                <form action="#" method="POST">
-                    <label>Usuário:</label><br>     
-                    <input
-                        name="usuario"
-                        id="usuario"
-                        type="text"
-                        placeholder="Digite o seu usuário..."                        
-                        <?=($erro==false) ? "autofocus" : "" ?>
-                        value="<?=($erro==true) ? $usuario : "" ?>"
-                        required
-                    >   
-                    <br>
-                    <label>Senha:</label><br>       
-                    <div style="display: flex; align-items: center"><!--ABRE AQUI-->
-                        <input
-                            name="senha"
-                            id="senha"
-                            type="password"
-                            placeholder="Digite a sua senha..."
-                            <?= ($erro==true) ? "autofocus" : "" ?>
-                            required
-                        >                    
-                        <button id="olho" type="button">Mostrar</button>
-                        <script>
-                            let olho = false;
-                            $("#olho").click(function(){
-                                if(olho===false){
-                                    olho=true;
-                                    $("#senha").attr('type', 'text');
-                                    $("#olho").html("Ocultar");
-                                }else{
-                                    olho=false;
-                                    $("#senha").attr('type', 'password');
-                                    $("#olho").html("Mostrar");
-                                }
-                            });
-                        </script>
-                    </div><!-- FECHA AQUI -->
-                    <br>
-                    <div class="botoes">
-                        <input class="botao" type="reset" value="Limpar">
-                        <input class="botao" type="submit" value="Entrar">
-                    </div>
-                </form>
+                        <div class="form-floating mt-1 mb-3">
+                            
+                            <input
+                                type="password"
+                                placeholder="Senha..."
+                                class="form-control"
+                                id="senha"
+                                name="senha"
+                                minlength="8"
+                                autocomplete="current-password"
+                                required
+                            />
+                            <label for="senha"><i class="bi bi-shield-lock" aria-hidden="true"></i> Digite a senha...</label>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
-           <?php endif; ?>
+            
         </div>
     </body>
 </html>
