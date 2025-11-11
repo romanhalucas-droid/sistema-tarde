@@ -122,20 +122,7 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
                     </div>
                     <div class='col-sm-6'>
                         
-                        <!--data nascimento -->
-                        <?php
-                        
-                            function dtSqlToBrasil($data){
-                                //pre: RECEBER A DATA NO FORMATO DE SQL PARA SER CONVERTIDA
-                                //POS: retornar data no formato brasileiro
-                                if(!empty($data)){//verificar se existe data
-                                    $temp = explode('-', $data);
-                                    return "{$temp[2]}/{$temp[1]}/{$temp[0]}";
-                                }else{
-                                    return "";
-                                }
-                            }
-                        ?>
+                        <!--data nascimento -->  
                         
                         <div class='form-floating mt-1'>
                             <input type='text' class='form-control' value='<?= dtSqlToBrasil($dtnasc)?>'
@@ -265,6 +252,63 @@ $id = !empty($_GET['id']) ? $_GET['id'] : 0;
             </form>
             <!-- FIM DO FORMULÁRIO -->
         </div>
+        
+        <!-- VIEW => USUALRIOS => CADASTRAR.PHP -->
+        
+        <script nonce="<?= uniqid() ?>">
+            $(document).ready(function (){                         
+                //$("#teste").html("Olá mundo!");                
+                $("#formcadastrarusuario").submit(function (e){                    
+                    e.preventDefault();
+                    
+                    $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
+                    let form = $(this);                    
+                    $.post(form.attr('action'), form.serialize(), function(retorno){                       
+                       let resultado = retorno.indexOf("success") != -1;
+                       retornoToast(retorno, getDateHour());
+                       if(resultado > 0){
+                           window.location.href = "/html/sistema/view/usuarios/listar.php";
+                       }
+                    });
+                });   
+                
+                ///////////////////////////////////////
+                //EXCLUIR
+                //////////////////////////////////////
+                $("#btnExc").on('click', function(e){
+                    bootbox.confirm({
+                        size: "small",
+                        message: "Deseja remover esse registro?",
+                        buttons:{
+                             confirm:{
+                                label: '<i class="bi bi-check-circle me-1"></i>Sim',
+                                className: 'btn-success'
+                             },
+                             cancel: {
+                                label: '<i class="bi bi-x-circle me-1"></i>Não',
+                                className: 'btn-danger'
+                             }
+                        },
+                        callback: function(result){
+                            if(result){//se result for verdadeiro(sim)
+                                //bloquiar tela temporariamente até acabar a requisição
+                                $(document).ajaxStart(loading()).ajaxStop($.unblockUI);
+                                let form = $("#formcadastrarusuario");
+                                $.post('/html/sistema/validacao/usuarios/excluir.php', form.serialize(), function(retorno){
+                                    let resultado = retorno.indexOf('success') != 1;
+                                    retornoToast(retorno, getDateHour());
+                                    if(resultado > 0){
+                                        window.location.href = "/html/sistema/view/usuarios/listar.php";
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    
+                });//
+                
+            });
+        </script>
         
         
         <!--INCLUIR RODAPE DO SITE -->

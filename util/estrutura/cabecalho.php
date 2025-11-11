@@ -60,6 +60,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/html/sistema/util/login/logado.php';
     type="text/javascript"    
 ></script>
 
+<script 
+    nonce="<?= uniqid() ?>" 
+    src="/html/sistema/js/main.js"
+    type="text/javascript"    
+></script>
+
 <style>
     input:required:invalid {
         border-color: red;

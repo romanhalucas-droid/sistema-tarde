@@ -21,23 +21,29 @@ $dtnasc = $_POST['dtnasc'];
 $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 $contato1 = $_POST['contato1'];
+$confirmarsenha = $_POST['confirmarsenha'];
 
 try{
     //DESATIVAR SAVE AUTOMÁTICO DO BD
     $conn_db->setAttribute(PDO::ATTR_AUTOCOMMIT, false);    
     $conn_db->beginTransaction(); //INICIANDO CONEXÃO MANUALMENTE    
     
-    $obj = new Usuario(null); //INSTANCIANDO OBJETO
+    $obj = new Usuarios(null); //INSTANCIANDO OBJETO
     $obj->setId($id); //PEGAR VALOR RECEBIDO PELO POST E ALOCAR NO OBJETO
     $obj->setNome($nome);
     $obj->setEmail($email);
-    $obj->setCpf($cpf);
-    $obj->setDtnasc($dtnasc);
-    $obj->setContato1($contato1);
+    $obj->setCpf(deixarNumero($cpf)); //MODIFICADO AQUI
+    $obj->setDtnasc(dtBrasilToSql($dtnasc)); //MODIFICADO AQUI
+    $obj->setContato1(deixarNumero($contato1)); //MODIFICADO AQUI
     $obj->setUsuario(mb_strtoupper($usuario, 'UTF-8'));//colocando usuário maiusculo
     
     if(strlen($senha)<8){//SE A SENHA DIGITADA TIVER MENOS DE 8 CARACTERES
         throw new Exception("A senha deve possuir pelo menos 8 dígitos.");
+    }
+
+    //VERIFICAR SE A SENHA É IGUAL A CONFIRMAÇÃO DA SENHA
+    if($senha !== $confirmarsenha){
+        throw new Exception("A senha e a confirmação da senha não correspondem!");
     }
     
     //CRIPTOGRÁFIA DA SENHA
@@ -64,8 +70,15 @@ try{
         $obj->setSenha(password_hash($senha, PASSWORD_DEFAULT));
     }
     
+    //VALIDAÇÃO DE INPUTS
+    $validar = $obj->validar();
+    if(!$validar['result']){
+        throw new Expection($validar['msg']);
+    }
+    
+    
     //SALVAR USUÁRIO NO BANCO DE DADOS
-    $idbd = UsuariosDAO::save([
+    $idbd = UsuariosDAO::salvar([
        'conn' => $conn_db,
        'obj' => $obj
     ]);

@@ -97,7 +97,7 @@ class UsuariosDAO{
             if($obj->getId()>0){//SE ID DO USUÁRIO FOR MAIOR QUE 0
                 //ATUALIZANDO
                 //id, nome, email, cpf, dtnasc, usuario, senha, contato1
-                $sql = "UPDATE usuarios SET nome=:nome, email=:email, cpf=:cpf, dtnasc=:dtnasc, usuario=:usuario "
+                $sql = "UPDATE usuarios SET nome=:nome, email=:email, cpf=:cpf, dtnasc=:dtnasc, usuario=:usuario, "
                         . "senha=:senha, contato1=:contato1 WHERE id=:id";
                 $sql = $conn->prepare($sql);//PREPARAR SQL
                 $sql->bindValue(":id", $obj->getId()); //ENVIAR O VALOR DE ID PARA O CAMPO :ID
