@@ -44,11 +44,38 @@
                             
                         </div>
                         
+                        <div class="row">
+                            <div class="col">
+                                <button
+                                    type='submit'
+                                    id='btnlogar'
+                                    name='btnlogar'
+                                    class='btn btn-lg w-100 btn-primary'
+                                >
+                                    <i class='bi bi-door-open-fill'></i> Entrar
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
             
         </div>
+        <script nonce='<?= uniqid()?>'>
+            //EVENTO AO CLICAR EM ENTRAR (SUBMIT)
+            $("#formLogin").submit(function (e){                
+                e.preventDefault(); //CANCELAR OPERAÇÃO PADRÃO DE SUBMIT, POIS SERA FEITA VIA AJAX(JAVASCRIPT)
+                
+                $(document).ajaxStart(loading()).ajaxStop($.unblockUI);//carregando ao efetuar operação
+                
+                let form = $('#formLogin'); //carregando formulário dentro de uma variavel
+                
+                //executar operação post (ajax)
+                $.post(form.attr('action'), form.serialize(), function(retorno){
+                   $('.resultado').html(retorno);
+                });
+            });
+        </script>                
     </body>
 </html>
 

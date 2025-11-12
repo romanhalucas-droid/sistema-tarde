@@ -32,6 +32,7 @@
                     //VERIFICAR SE USUÁRIO DIGITADO ESTÁ CORRETO
                     if($usuario=="admin" AND $senha=="inspira"){
                         //USUÁRIO ENTROU COM SUCESSO
+                        session_regenerate_id();
                         $_SESSION['logadosistema']  = true;
                         $_SESSION['usuariosistema'] = $usuario;
                         $_SESSION['nomesistema'] = "Lucas Barbosa Romanha";                        
