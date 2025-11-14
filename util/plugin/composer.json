@@ -1,0 +1,11 @@
+{
+    "config":{
+      "platform":{
+            "php":"7.2"
+      }
+    },
+    "name": "lucas/plugin",
+    "require": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
