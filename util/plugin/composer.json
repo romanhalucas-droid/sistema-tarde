@@ -5,7 +5,13 @@
       }
     },
     "name": "lucas/plugin",
-    "require": {},
+    "require": {
+        "dompdf/dompdf": "^3.1",
+        "ramsey/uuid": "^4.2",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "endroid/qr-code": "^3.9",
+        "respect/validation": "^2.0"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
