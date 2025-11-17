@@ -36,7 +36,8 @@ if($sql->rowCount() == 1){ //SE QUANTIDADE DE REGISTRO RETORNARDO FOR IGUAL A 1
             ?><div class='alert alert-success' role='alert'>Usuário logado com sucesso!</div><?php
             
             //redirecionamento para a página principal
-            header('location:/html/sistema/view/inicio/');
+            //header('location:/html/sistema/view/inicio/');
+            ?><script>window.location.href="/html/sistema/view/inicio/";</script>
             
         }else{//senão senha inválida
             

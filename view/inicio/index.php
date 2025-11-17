@@ -30,7 +30,7 @@
                         break;
                 }
             ?>
-            <h2><?=$iconturno?><?=$saudacao['msg']?>, <?=$_SESSION['nomesistema'] ?></h2>
+            <h2><?=$iconturno?><?=$saudacao['msg']?>, <?=$_SESSION['nomeusuariosistema'] ?></h2>
         </div>
         
         <?php include_once "{$_SERVER['DOCUMENT_ROOT']}/html/sistema/util/estrutura/rodape.php"; ?>
