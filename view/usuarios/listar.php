@@ -13,9 +13,15 @@
         
         <div class="container shadow-sm mt-sm-2 bg-white p-3 rounded-3">
             <div class="btns">
+                
                 <!--Adicionar-->
                 <a href="/html/sistema/view/usuarios/cadastrar.php?id=0" class="btn btn-success">              
                     <i class="bi bi-person-fill-add me-1"></i> Adicionar
+                </a>
+                
+                <!-- Gerar relatório -->
+                <a href="/html/sistema/relatorio/usuarios/" class="btn btn-dark">
+                    Relatório
                 </a>
             </div>
             
