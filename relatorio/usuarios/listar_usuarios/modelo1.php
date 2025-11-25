@@ -1,0 +1,51 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/login/logado.php';
+
+//usa o namespace do DOMPDF
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+//INICIAR O DOMPDF
+$option = new Options();
+$option->set('isHtml5ParserEnabled', true); //ATIVAR HTML5 NO DOMPDF
+$option->set('isPhpEnabled', true); //ATIVAR PHP NO DOMPDF
+$dompdf = new Dompdf($option); //INICIANDO O DOMPDF
+
+$html = "";
+$css = "";
+$body = "";
+$rodape = "";
+$head = "";
+
+//ABRIR BD
+require_once $_SERVER['DOCUMENT_ROOT']."/html/sistema/util/conexao/inicio_conexao.php";
+
+//CARREGAR USUÁRIOS
+$usuarios = UsuariosDAO::selectAll([
+   'conn'  => $conn_db
+]);
+
+//FECHAR CONEXÃO
+require_once $_SERVER['DOCUMENT_ROOT']."/html/sistema/util/conexao/fim_conexao.php";
+
+$css .= "
+    @page {
+        margin: 30px 50px 50px 50px;
+    }
+";
+
+$head .= "
+    <!DOCTYPE html>
+    <html lang='pt-br'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Listar Usuário - MODELO 1</title>
+        <style>{$css}</style>
+    </head>
+    <body>
+";
+
+$body .="";
+
+$rodape.="</body></html>";
