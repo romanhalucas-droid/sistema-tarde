@@ -32,6 +32,7 @@ $css .= "
     @page {
         margin: 30px 50px 50px 50px;
     }
+    
 ";
 
 $head .= "
@@ -46,6 +47,46 @@ $head .= "
     <body>
 ";
 
-$body .="";
+$body .= "
+    <h1>Listagem de usuários</h1>
+    <table>        
+    ";
 
-$rodape.="</body></html>";
+//id, nome, email, cpf, dtnasc, usuario, senha, contato1
+$body .= "
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Data de nascimento</th>
+                <th>Idade</th>
+                <th>Contato 1</th>
+            </tr>
+        </thead>
+    ";
+
+$body .= "<tbody>";
+
+//PERCORRER TODOS OS USUÁRIOS
+foreach ($usuarios as $u){
+    $body .= "
+        <tr>
+            <td>{$u->getNome()}</td>
+            <td>{$u->getEmail()}</td>
+            <td>". dtSqlToBrasil($u->getDtNasc()). "</td>
+            <td>". calcularIdade($u->getDtNasc()). "</td>
+            <td>{$u->getContato1()}</td>
+        </tr>
+    ";
+}
+
+$body .= "</tbody>";
+
+$rodape .= "</body></html>";
+
+$html = $head . $body . $rodape;
+$dompdf->loadHtml($html); //carregando o html no dompdf
+$dompdf->set_option('defaultFont', 'Arial');
+$dompdf->setPaper('A4', 'portrait');//tipo e orientação de papel
+$dompdf->render(); //criar o meu pdf
+$dompdf->stream('listar_usuarios_modelo1.pdf', ["Attachment" => 0]); //exibir em tela o pdf

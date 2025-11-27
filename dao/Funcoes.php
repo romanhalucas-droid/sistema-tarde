@@ -62,8 +62,20 @@ function deixarNumero($string){
     return !empty($string) ? preg_replace("/[^0-9]/", "", $string) : NULL;
 }
 
-
-
+//função para calcular idade de uma pessoa enviando a data de nascimento no seguite
+//formato: ANO-MES-DIA (string/texto/cadeia)
+function calcularIdade($dataNascimento){
+    date_default_timezone_set('America/Sao_Paulo'); //DEFININDO FUSO
+    
+    //criar um objeto DateTime com a data de nascimento
+    $nascimento = new DateTime($dataNascimento);
+    $hoje = new DateTime();
+    
+    //calcular diferença
+    $idade = $hoje->diff($nascimento);
+    
+    return $idade->y;
+}
 
 
 

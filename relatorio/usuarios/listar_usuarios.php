@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/logado.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/login/logado.php';
 
 if(!empty($_GET)){//verificando se esta recebendo requisição via GET
     $modelo = $_GET['modelo']; //recebe o modelo selecionado pelo usuário

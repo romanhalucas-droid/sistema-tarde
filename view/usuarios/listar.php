@@ -20,7 +20,8 @@
                 </a>
                 
                 <!-- Gerar relatório -->
-                <a href="/html/sistema/relatorio/usuarios/" class="btn btn-dark">
+                <a href="/html/sistema/relatorio/usuarios/listar_usuarios.php?modelo=1"
+                   class="btn btn-dark">
                     Relatório
                 </a>
             </div>
