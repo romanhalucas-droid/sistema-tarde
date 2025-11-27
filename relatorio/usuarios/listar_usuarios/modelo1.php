@@ -32,7 +32,27 @@ $css .= "
     @page {
         margin: 30px 50px 50px 50px;
     }
+    table{        
+        border-collapse: collapse; /*REMOVER DUPLICAÇÃO DA BORDA NA TABELA*/
+        width: 100%;
+        table-layout: fixed; /*FIXAR LAYOUT NA PÁGINA*/
+        word-wrap: break-word; /*QUEBRAR LINHA NO MEIO DA PALAVRA*/
+    }
     
+    th, td{
+        padding: 5px;
+        font-size: 12px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    th{
+        background-color: #f2f2f2;
+    }
+    
+    h1{
+        text-align: center;
+    }
 ";
 
 $head .= "
@@ -49,7 +69,7 @@ $head .= "
 
 $body .= "
     <h1>Listagem de usuários</h1>
-    <table>        
+    <table border='1'>        
     ";
 
 //id, nome, email, cpf, dtnasc, usuario, senha, contato1
@@ -80,7 +100,7 @@ foreach ($usuarios as $u){
     ";
 }
 
-$body .= "</tbody>";
+$body .= "</tbody></table>";
 
 $rodape .= "</body></html>";
 
