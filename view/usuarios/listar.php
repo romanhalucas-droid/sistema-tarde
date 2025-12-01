@@ -21,7 +21,7 @@
                 
                 <!-- Gerar relatório -->
                 <a href="/html/sistema/relatorio/usuarios/listar_usuarios.php?modelo=1"
-                   class="btn btn-dark">
+                   class="btn btn-dark" target="_blank">
                     Relatório
                 </a>
             </div>
