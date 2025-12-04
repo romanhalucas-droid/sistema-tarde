@@ -47,6 +47,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/html/sistema/util/login/logado.php';
                         
                         require_once $_SERVER['DOCUMENT_ROOT']."/html/sistema/util/conexao/fim_conexao.php";
                         ?>
+                        
+                        
                     </tbody>
                 </table>
             </div>
